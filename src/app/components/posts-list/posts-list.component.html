@@ -1,0 +1,88 @@
+<div class="row" style="margin-top: 100px;">
+    <div class="col-9 mb-5">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              [(ngModel)]="title"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="searchTitle()"
+              >
+                Rechercher
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-11">
+          <div class="card-footer rounded border shadow-lg">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
+          </div>
+
+          <div class="justify-content-between m-3">
+            <b>Liste des Posts par page</b>
+            <select (change)="handlePageSizeChange($event)" class="form-select ml-3">
+              <option class="form-option" *ngFor="let size of pageSizes" [ngValue]="size">
+                {{ size }}
+              </option>
+            </select>
+
+          <button class="m-3 btn btn-sm btn-danger" (click)="removeAllPosts()">
+            Tout supprimer
+          </button>
+          </div>
+          <div class="card mb-2" *ngFor="let post of posts | paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: totalItems
+              }; let i = index"
+            [class.alert-primary]="i == currentIndex"
+            (click)="setActivePost(post, i)">
+            <div class="card-body">
+              <h3 class="card-title">Titre: {{ post.title }}</h3>
+              <p class="card-text"><b>Description:</b> {{ post.body |slice:0:50 }}...</p>
+            </div>
+          </div>
+          <div class="card-footer rounded border shadow-lg" style="margin-bottom: 5%;">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row">
+          <div *ngIf="currentPost">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">Affichage d'un Post</div>
+              <div class="card-body">
+                <h5 class="card-title"> <strong>Title: </strong>{{ currentPost.title }}</h5>
+                <p class="card-text"><strong>Body: </strong>{{ currentPost.body }}</p>
+                <a class="btn btn-outline-primary" routerLink="/posts/{{ currentPost.id }}">
+                  Modifier
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!currentPost">
+            <br />
+            <p>Cliquer sur un post...</p>
+          </div>
+      </div>
+    </div>
+
+  </div>

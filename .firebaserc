@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "crud-angular-unipro": {
+      "hosting": {
+        "courses": [
+          "crud-angular-unipro"
+        ]
+      }
+    }
+  }
+}

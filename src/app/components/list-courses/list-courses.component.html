@@ -1,0 +1,66 @@
+<div class="row" style="margin-top: 100px;">
+  <div class="col-9 mb-5">
+    <div class="row">
+      <div class="col-md-11">
+        <div class="card-footer rounded border shadow-lg">
+          <pagination-controls
+          previousLabel="Precedent"
+          nextLabel="Suivant"
+          (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+        </div>
+
+        <div class="justify-content-between m-3">
+        <button class="m-3 btn btn-sm btn-danger" (click)="removeAllCourses()">
+          Tout supprimer
+        </button>
+        </div>
+        <div class="card mb-2" *ngFor="let course of courses | paginate : {
+          itemsPerPage: pageSize,
+          currentPage: page,
+          totalItems: totalItems
+          }; let i = index"
+        [class.alert-primary]="i == currentIndex"
+        (click)="setActiveCourse(course, i)">
+          <div class="card-body">
+            <h3 class="card-title">Nom: {{ course.nom }}</h3>
+            <p class="card-text"><b>Commentaire:</b> {{ course.comment |slice:0:100 }}...</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer rounded border shadow-lg">
+        <pagination-controls
+        previousLabel="Precedent"
+        nextLabel="Suivant"
+        (pageChange)="handlePageChange($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="row">
+        <div *ngIf="currentCourse">
+         <!--<div class="card" style="width: 18rem;">
+            <div class="card-header">Affichage d'une Course</div>
+            <div class="card-body">
+              <h5 class="card-title"> <strong>Nom: </strong>{{ currentCourse.nom }}</h5>
+              <p class="card-text"><strong>Comment: </strong>{{ currentCourse.comment }}</p>
+              <a class="btn btn-outline-primary" routerLink="/courses/{{ currentCourse.id }}">
+                Modifier
+              </a>
+            </div>
+          </div>
+        </div>
+        -->
+          <app-course-details
+            (refreshList)="refreshList()"
+            [course]="currentCourse"></app-course-details>
+        </div>
+        <div *ngIf="!currentCourse">
+          <br />
+          <p>Cliquer sur un une course...</p>
+        </div>
+    </div>
+  </div>
+
+</div>
