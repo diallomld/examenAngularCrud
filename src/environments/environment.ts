@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-   firebaseConfig: {
+  firebaseConfig: {
     apiKey: 'AIzaSyDrETs5s_gb8HjHwkE8YYiGSZrP_sIyONM',
     authDomain: 'crud-angular-unipro.firebaseapp.com',
     databaseURL: 'https://crud-angular-unipro-default-rtdb.firebaseio.com',
