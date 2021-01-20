@@ -1,0 +1,65 @@
+<div>
+  <div *ngIf="currentPost.id" class="edit-form" style="margin-top: 100px;">
+    <h4>Post</h4>
+    <div *ngIf="isUpdated" class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong><p>{{ message }}</p></strong>
+    </div>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Launch modal</button>
+
+    <form>
+      <div class="form-group">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentPost.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="body">Body</label>
+        <input
+          type="text"
+          class="form-control"
+          id="body"
+          [(ngModel)]="currentPost.body"
+          name="body"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger w-30 mr-2" (click)="deletePost()">
+      Supprimer
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success w-50 mb-2"
+      (click)="updatePost()"
+    >
+      Mettre à jour
+    </button>
+  </div>
+
+  <div *ngIf="!currentPost.id">
+    <br />
+    <p>impossible d'acceder à ce tutoriel...</p>
+  </div>
+  <div class="card-body rounded-lg shadow-lg"><h1>Les commentaire de ce post</h1></div>
+  <div class="card mb-2 mt-3" *ngFor="let comment of comments">
+    <div class="card-body">
+      <h3 class="card-title">Name: {{ comment.name }}</h3>
+      <p class="card-text"><b>Body:</b> {{ comment.email }}</p>
+      <p class="card-text"><b>Body:</b> {{ comment.body }}</p>
+    </div>
+  </div>
+</div>
+ <script>
+    $(".alert").alert();
+    $(".myModal").show();
+
+  </script>

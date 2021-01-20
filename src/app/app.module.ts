@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddCoursesComponent } from './components/add-courses/add-courses.component';
 import { HomeComponent } from './components/home/home.component';
-import { ListCoursesComponent } from './components/list-courses/list-courses.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddPostComponent } from './components/add-post/add-post.component';
-import { PostDetailsComponent } from './components/post-details/post-details.component';
-import { PostsListComponent } from './components/posts-list/posts-list.component';
+import { AddPostComponent } from './posts/components/add-post/add-post.component';
+import { PostDetailsComponent } from './posts/components/post-details/post-details.component';
+import { PostsListComponent } from './posts/components/posts-list/posts-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -22,14 +20,17 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import { CourseDetailsComponent } from './components/course-details/course-details.component';
+import { AddUserComponent } from './users/components/add-user/add-user.component';
+import { UserDetailsComponent } from './users/components/user-details/user-details.component';
+import { UsersListComponent } from './users/components/users-list/users-list.component';
+import { CommentDetailsComponent } from './comments/components/comment-details/comment-details.component';
+import { CommentsListComponent } from './comments/components/comments-list/comments-list.component';
+import { AddCommentComponent } from './comments/components/add-comment/add-comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddCoursesComponent,
     HomeComponent,
-    ListCoursesComponent,
     HeaderComponent,
     FooterComponent,
     AddPostComponent,
@@ -37,7 +38,12 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
     PostsListComponent,
     SigninComponent,
     SignupComponent,
-    CourseDetailsComponent
+    AddUserComponent,
+    UserDetailsComponent,
+    UsersListComponent,
+    CommentDetailsComponent,
+    CommentsListComponent,
+    AddCommentComponent,
   ],
   imports: [
     BrowserModule,

@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
     this.auth.createNewUser(email, password).then(
       (resp) => {
         console.log('inscription ok');
-        this.router.navigateByUrl('/posts');
+        this.router.navigateByUrl('/home');
       }).catch(
         (error) => {
           console.log('erreur d\'inscription');

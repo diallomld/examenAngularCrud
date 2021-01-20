@@ -1,0 +1,91 @@
+<div class="row" style="margin-top: 100px;">
+    <div class="col-9 mb-5">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              [(ngModel)]="name"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="searchName()"
+              >
+                Rechercher
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-11">
+          <div class="card-footer rounded border shadow-lg">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
+          </div>
+
+          <div class="justify-content-between m-3">
+            <b>Liste des commentaire par page</b>
+            <select (change)="handlePageSizeChange($event)" class="form-select ml-3">
+              <option class="form-option" *ngFor="let size of pageSizes" [ngValue]="size">
+                {{ size }}
+              </option>
+            </select>
+
+          <button class="m-3 btn btn-sm btn-danger" (click)="removeAllComments()">
+            Tout supprimer
+          </button>
+          </div>
+          <div class="card mb-2" *ngFor="let comment of comments | paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: totalItems
+              }; let i = index"
+            [class.alert-primary]="i == currentIndex"
+            (click)="setActiveComment(comment, i)">
+            <div class="card-body">
+              <h3 class="card-title">Name: {{ comment.name }}</h3>
+              <p class="card-text"><b>Body:</b> {{ comment.body |slice:0:50 }}...</p>
+              <p><a class="btn btn-outline-secondary" routerLink="/comments/{{ currentComment!.id }}">
+                voir plus
+              </a></p>
+            </div>
+          </div>
+          <div class="card-footer rounded border shadow-lg" style="margin-bottom: 5%;">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row">
+          <div *ngIf="currentComment">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">Affichage d'un comment</div>
+              <div class="card-body">
+                <h5 class="card-title"> <strong>Title: </strong>{{ currentComment!.name }}</h5>
+                <h6 class="card-text"><strong>Email: </strong>{{ currentComment!.email }}</h6>
+                <p class="card-text"><strong>Body: </strong>{{ currentComment!.body }}</p>
+                <a class="btn btn-outline-primary" routerLink="/comments/{{ currentComment.id }}">
+                  Modifier
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!currentComment">
+            <br />
+            <p>Cliquer sur un comment...</p>
+          </div>
+      </div>
+    </div>
+
+  </div>

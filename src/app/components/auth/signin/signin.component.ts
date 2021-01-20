@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
         console.log('Connexion ok');
         this.message = 'Connexion reussit';
         this.isConnected = true;
-        this.router.navigateByUrl('/posts');
+        this.router.navigateByUrl('/users');
       }).catch(
         (error) => {
           console.log('erreur de Connexion');
@@ -53,6 +53,7 @@ export class SigninComponent implements OnInit {
     firebase.default.auth().signInWithPopup(this.provider)
     .then((result) => {
       console.log(JSON.stringify(result.user));
+      this.router.navigateByUrl('/users');
     })
     .catch((error) => {
       console.error(JSON.stringify(error));

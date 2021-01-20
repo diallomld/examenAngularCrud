@@ -11,16 +11,22 @@
           <a class="nav-link" aria-current="page" routerLink="/home" >Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/add-courses">Add Courses</a>
+          <a class="nav-link " routerLink="/users">Liste des Utilisateur</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " routerLink="list-courses">Liste des Courses</a>
+          <a class="nav-link" href="/user/add">Ajouter un Utilisateur</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " routerLink="/comments">Liste des Commentaires</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/comment/add">Ajouter un Commentaires</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="posts">Liste des Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " routerLink="post/add">Add Post</a>
+          <a class="nav-link " routerLink="post/add">Ajouter un Post</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" *ngIf="!isAuth" routerLink="/auth/signup">Créer un compte</a>
@@ -34,10 +40,6 @@
              *ngIf="isAuth">Déconnexion</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

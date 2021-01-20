@@ -1,0 +1,127 @@
+<div class="row" style="margin-top: 100px;">
+    <div class="col-9 mb-5">
+      <div class="row">
+        <div class="col-md-11">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search..."
+              [(ngModel)]="name"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="searchName()"
+              >
+                Rechercher
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-11">
+          <div class="card-footer rounded border shadow-lg">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+            ></pagination-controls>
+          </div>
+
+          <div class="justify-content-between m-3">
+            <b>Liste des utilisateurs par page</b>
+            <select (change)="handlePageSizeChange($event)" class="form-select ml-3">
+              <option class="form-option" *ngFor="let size of pageSizes" [ngValue]="size">
+                {{ size }}
+              </option>
+            </select>
+
+          <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
+            Tout supprimer
+          </button>
+          </div>
+          <div class="card mb-2" *ngFor="let user of users | paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: totalItems
+              }; let i = index"
+            [class.alert-primary]="i == currentIndex"
+            (click)="setActiveUser(user, i)">
+            <div class="card-body">
+                  <div class="card">
+                    <div class="card-header">Info User</div>
+                    <div class="card-body">
+                      <h3 class="card-text">Name: {{ user.name }}</h3>
+                      <p class="card-text"><b>Username:</b> {{ user.username }}</p>
+                      <p class="card-text"><b>email:</b> {{ user.email }}</p>
+                      <p class="card-text"><b>Phone:</b> {{ user.phone }}</p>
+                      <p class="card-text"><b>Website:</b> {{ user.website }}</p>
+                    </div>
+                  </div>
+                  <div class="card-header">Adress</div>
+                  <div class="card-body">
+                    <p class="card-text"><b>street:</b> {{ user.address.street }}</p>
+                    <p class="card-text"><b>city:</b> {{ user.address.city }}</p>
+                    <p class="card-text"><b>zipcode:</b> {{ user.address.zipcode }}</p>
+                    <div class="card-header">Geolocalisation</div>
+                    <div class="card-body">
+                      <p class="card-text"><b>latitude:</b> {{ user.address.geo.lat }}</p>
+                      <p class="card-text"><b>longitude:</b> {{ user.address.geo.lat }}</p>
+
+                    </div>
+
+                  </div>
+                  <div class="card-header">company</div>
+                  <div class="card-body">
+                    <p class="card-text"><b>name:</b> {{ user.company.name }}</p>
+                    <p class="card-text"><b>catchPhrase:</b> {{ user.company.catchPhrase }}</p>
+                    <p class="card-text"><b>bs:</b> {{ user.company.bs }}</p>
+
+                  </div>
+              <p><a class="btn btn-outline-primary" routerLink="/users/{{ currentUser!.id }}">
+                voir plus
+              </a></p>
+            </div>
+          </div>
+          <div class="card-footer rounded border shadow-lg" style="margin-bottom: 5%;">
+            <pagination-controls
+            previousLabel="Precedent"
+            nextLabel="Suivant"
+            (pageChange)="handlePageChange($event)"
+          ></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row">
+          <div *ngIf="currentUser">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">Affichage d'un comment</div>
+              <div class="card-body">
+                <h3 class="card-title">Name: {{ currentUser!.name }}</h3>
+                <p class="card-text"><b>Username:</b> {{ currentUser!.username }}</p>
+                <p class="card-text"><b>email:</b> {{ currentUser!.email }}</p>
+                <p class="card-text"><b>Phone:</b> {{ currentUser!.phone }}</p>
+                <p class="card-text"><b>Website:</b> {{ currentUser!.website }}</p>
+                <div class="card-group">
+
+                  <p class="card-text"><b>street:</b> {{ currentUser!.address!.street }}</p>
+                  <p class="card-text"><b>city:</b> {{ currentUser!.address!.city }}</p>
+
+                </div>
+                <a class="btn btn-outline-primary" routerLink="/users/{{ currentUser!.id }}">
+                  Modifier
+                </a>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!currentUser">
+            <br />
+            <p>Cliquer sur un user...</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
